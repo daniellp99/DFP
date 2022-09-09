@@ -4,6 +4,14 @@ from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Members
 
+def testing(request):
+  mydata = Members.objects.all()
+  template = loader.get_template('template.html')
+  context = {
+    'mymembers': mydata,
+  }
+  return HttpResponse(template.render(context, request))
+
 def index(request):
   mymembers = Members.objects.all().values()
   template = loader.get_template('index.html')
